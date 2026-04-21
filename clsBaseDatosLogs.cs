@@ -20,11 +20,9 @@ namespace pryFernandezIES
 
         public clsBaseDatosLogs()
         {
-            // Constructor para inicializar la conexión y el comando.
             conexionBD = new OleDbConnection();
             comandoBD = new OleDbCommand();
         }
-
         public string datosTabla;
         public void ConectarBD()
         {
@@ -40,10 +38,7 @@ namespace pryFernandezIES
         }
         public void TraerDatos(DataGridView grilla)
         {
-            //instancia un objeto en la memoria
             comandoBD = new OleDbCommand();
-
-            //conecta el comando con la conexion
             comandoBD.Connection = conexionBD;
             comandoBD.CommandType = System.Data.CommandType.TableDirect;
             comandoBD.CommandText = "LOGS";
@@ -52,8 +47,6 @@ namespace pryFernandezIES
             grilla.Columns.Add("Nombre", "Nombre");
             grilla.Columns.Add("Fecha", "Fecha");
             grilla.Columns.Add("Detalle", "Detalle");
-
-            //leo como si fuera un archivo
             if (lectorBD.HasRows)
             {
                 while (lectorBD.Read())

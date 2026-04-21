@@ -14,7 +14,6 @@ namespace pryFernandezIES
 {
     class clsBaseDatosCliente
     {
-        //Objetos
         OleDbConnection conexionBD;
         OleDbCommand comandoBD;
         OleDbDataReader lectorBD;
@@ -42,10 +41,7 @@ namespace pryFernandezIES
 
         public void TraerDatos(DataGridView grilla)
         {
-            //instancia un objeto en la memoria
             comandoBD = new OleDbCommand();
-
-            //conecta el comando con la conexion
             comandoBD.Connection = conexionBD;
             comandoBD.CommandType = System.Data.CommandType.TableDirect;
             comandoBD.CommandText = "CLIENTES";
@@ -77,22 +73,20 @@ namespace pryFernandezIES
             comandoBD = new OleDbCommand();
 
             comandoBD.Connection = conexionBD;
-            comandoBD.CommandType = System.Data.CommandType.TableDirect;  //q tipo de operacion quierp hacer y que me traiga TOD la tabla con el tabledirect
-            comandoBD.CommandText = "CLIENTES"; //Que tabla traigo
+            comandoBD.CommandType = System.Data.CommandType.TableDirect;  
+            comandoBD.CommandText = "CLIENTES"; 
 
-            lectorBD = comandoBD.ExecuteReader(); //abre la tabla y muestra por renglon
+            lectorBD = comandoBD.ExecuteReader(); 
 
-            if (lectorBD.HasRows) //SI TIENE FILAS
+            if (lectorBD.HasRows) 
             {
-                bool Find = false; // bandera
-                while (lectorBD.Read()) //mientras pueda leer, mostrar (leer)
+                bool Find = false; 
+                while (lectorBD.Read()) 
                 {
                     if (int.Parse(lectorBD[0].ToString()) == codigo)
                     {
-
-                        //datosTabla += "-" + lectorBD[0]; //dato d la comlumna 0
                         MessageBox.Show("Cliente Existente " + lectorBD[0], "Consulta", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Find = true; // bandera
+                        Find = true; 
                         break;
                     }
 
@@ -140,7 +134,6 @@ namespace pryFernandezIES
                 }                          
             }
             OleDbCommandBuilder cb = new OleDbCommandBuilder(adaptadorBD);
-           
             adaptadorBD.Update(objDataSet, "CLIENTES");                     
         }
     }

@@ -38,10 +38,7 @@ namespace pryFernandezIES
 
         public void TraerDatos(DataGridView grilla)
         {
-            //instancia un objeto en la memoria
             comandoBD = new OleDbCommand();
-
-            //conecta el comando con la conexion
             comandoBD.Connection = conexionBD;
             comandoBD.CommandType = System.Data.CommandType.TableDirect;
             comandoBD.CommandText = "USUARIOS";
@@ -52,7 +49,6 @@ namespace pryFernandezIES
             grilla.Columns.Add("Contraseña", "Contraseña");
             grilla.Columns.Add("Categoria", "Categoria");
 
-            //leo como si fuera un archivo
             if (lectorBD.HasRows)
             {
                 while (lectorBD.Read())
@@ -73,24 +69,22 @@ namespace pryFernandezIES
 
             lectorBD = comandoBD.ExecuteReader();
 
-            // Mientras haya registros
             if (lectorBD.HasRows)
             {
-                // Leo todas los registros
                 while (lectorBD.Read())
                 {     
                     if (lectorBD[1].ToString() == usuario && lectorBD[2].ToString() == contraseña)
                     {
                         string categoria = lectorBD[3].ToString(); 
                         
-                        //
+                        
                             clsBaseDatosLogs objBaseDatosLogs;
                             objBaseDatosLogs = new clsBaseDatosLogs();                    
 
                             DateTime fechaHora = DateTime.Now;
                             string detalle = "Inicio de Sesion";
                             objBaseDatosLogs.Logs(usuario, fechaHora, detalle);
-                        //
+                        
 
                         frmInicio.Hide();
                         frmCargaPrograma pasar = new frmCargaPrograma(usuario,categoria);
